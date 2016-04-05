@@ -1,0 +1,15 @@
+Analysis & Synthesis Status : Successful - Fri May 24 19:04:31 2013
+Quartus II Version : 9.0 Build 132 02/25/2009 SJ Full Version
+Revision Name : LC3
+Top-level Entity Name : LC3
+Family : Stratix II
+Logic utilization : N/A
+    Combinational ALUTs : 1,004
+    Dedicated logic registers : 486
+Total registers : 486
+Total pins : 612
+Total virtual pins : 0
+Total block memory bits : 147,456
+DSP block 9-bit elements : 0
+Total PLLs : 0
+Total DLLs : 0

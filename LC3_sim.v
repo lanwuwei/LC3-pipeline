@@ -1,0 +1,331 @@
+/*
+ * CPU主模块 
+ * PB10011041 王月鹏  PB10011056  兰武伟   
+ * 合作完成  
+ */
+
+module LC3_sim (reset,clk,we,rd,MD,MA,irq,clk_s,
+	_r0,_r1,_r2,_r3,_r4,_r5,_r6,_r7,
+	_pc, _exPSRout,
+	_int_r,_exc,
+	_N,_Z,_P,_VFn,_VFp,
+	_i_q, _ifidIR,
+	_idexIR, _ifidNPC, _idexNPC, _idexImm,
+	_exALUoutput,
+	_exmemIR,
+	_memwbIR,
+	_exAin, _exBin, MD_out, _exTMP, _memwbData,
+	_ifPCout, _idPCout, _exPCout, _memPCout, _PCval,
+	_idCond, _exCond, _memCond, _pause,
+	_intR6out, intMAout_, intMDout_, intMDout,
+	_idEXCout, _ifMA,myint_r,_wbINTF,irq_r
+	); 
+	
+	//debug output
+	output [15:0] _i_q, _ifidIR;
+	output [15:0] _idexIR, _ifidNPC, _idexNPC, _idexImm;
+	output [15:0] _exALUoutput;
+	output [15:0] _exmemIR, _memwbIR;
+	output [15:0] _exAin, _exBin;
+	output [15:0] MD_out, _exTMP, _memwbData;
+	output [15:0] _ifPCout, _idPCout, _exPCout, _memPCout, _PCval;
+	output _idCond, _exCond, _memCond;
+	output [15:0] _exPSRout, _intR6out, intMAout_, intMDout_, intMDout;
+	output _pause,myint_r,_wbINTF,irq_r;
+	output _idEXCout;
+	output [15:0] _ifMA;
+	
+	//input and output
+	input         clk, reset;
+	input         irq;
+	output        clk_s;
+	output        we,rd; 
+	output[15:0]  MA; 
+	inout[15:0]   MD; 
+	reg           rd;
+	wire          we;
+	
+	output[15:0]  _r0, _r1, _r2, _r3, _r4, _r5, _r6, _r7;
+	output[15:0]  _pc;
+	output        _int_r,_exc;
+	output        _N,_Z,_P,_VFn,_VFp;
+	
+	wire [15:0]   MA;
+
+	reg[15:0]     PC;
+	reg[15:0]     PSR;
+           
+	reg           int_r;
+	reg           EXC;
+
+	reg[15:0] R0;
+	reg[15:0] R1;
+	reg[15:0] R2;
+	reg[15:0] R3;
+	reg[15:0] R4;
+	reg[15:0] R5;
+	reg[15:0] R6;
+	reg[15:0] R7;
+	reg[15:0] TMP;
+
+	assign {_r0, _r1, _r2, _r3, _r4, _r5, _r6, _r7} = {R0, R1, R2, R3, R4, R5, R6, R7};
+	assign clk_s = !clk;
+	assign _pc = PC;
+	assign _int_r = int_r;
+	assign _exc = EXC;
+	assign {_VFn, _VFp, _N, _Z, _P} = PSR[4:0];
+
+	wire [15:0] _PCval;
+	wire _idCond, _exCond, _memCond;
+	wire [15:0] _exPCout, _memPCout;
+
+	PCMUX mypcmux(.ifPCout(_ifPCout), .idPCout(_idPCout), .exPCout(_exPCout), .memPCout(_memPCout), .intPCout(_intPCout),//input
+				  .idCond(_idCond), .exCond(_exCond), .memCond(_memCond), .intCond(flag_),	//input
+				  .PCval(_PCval));	//output
+	
+	reg [15:0] _PSR;
+	
+	always @(posedge clk)
+	begin
+		_PSR <= PSR;
+	end
+	
+//	wire change = reset |_idCond | _exCond | _memCond;
+	wire not_clk = !clk;
+	always @(posedge clk or posedge reset or posedge not_clk)
+	begin
+		if (reset)
+		begin
+			PC <= 16'h0060;
+		end
+		else
+		begin
+			PC <= _PCval;			
+		end
+	end
+	
+	always @(reset or _exN or _exZ or _exP or _exVFn or _exVFp or _memN or _memZ or _memP or _memwbIR or _exmemIR)
+	begin
+		if (reset)
+		begin
+//			PC <= 16'h0060;
+			PSR <= 16'h8000;
+		end
+		else begin
+//			PC <= _PCval;
+			if ((_memwbIR[15:12] == 4'b0010 || _memwbIR[15:12] == 4'b1010 || _memwbIR[15:12] == 4'b0110)
+			   && (_exmemIR[15:12] != 4'b0001 && _exmemIR[15:12] != 4'b0101 && !(_exmemIR[15:12] == 4'b1001 && _exmemIR[5:0] != 6'b000000)))
+				PSR <= {11'h400, _exVFn, _exVFp, _memN, _memZ, _memP};
+			else if (_exmemIR[15:12] == 4'b0001 || _exmemIR[15:12] == 4'b0101 || (_exmemIR[15:12] == 4'b1001 && _exmemIR[5:0] != 6'b000000))
+				PSR <= {11'h400, _exVFn, _exVFp, _exN, _exZ, _exP};
+			else
+				PSR <= _PSR;
+		end
+	end
+
+
+	reg _EXCtemp;
+	reg _EXCflag;
+	always @(posedge reset or posedge clk)
+	begin
+		if (reset)
+		begin
+			_EXCtemp <= 1'b0;
+			_EXCflag <= 1'b0;
+		end
+		else if (_idEXCout == 1'b1 && _EXCflag == 1'b0)
+		begin
+			_EXCtemp <= 1'b1;
+			_EXCflag <= 1'b1;
+		end
+		else if (_EXCtemp == 1'b1)
+		begin
+			_EXCtemp <= 1'b0;
+			_EXCflag <= 1'b1;
+		end
+		else if (_idEXCout == 1'b0)
+		begin
+			_EXCtemp <= 1'b0;
+			_EXCflag <= 1'b0;
+		end
+	end
+
+
+	reg irq_r;
+	reg myint_r;
+always @( negedge irq or posedge int_r_out or posedge reset)
+  begin
+    if (!irq )
+      irq_r <= 1'b1;  
+    else if(reset)
+	  irq_r <= 1'b0;
+    else if(int_r_out)
+      irq_r <= 1'b0;  //received interrput request 
+  end
+	reg flag;
+always @(posedge reset or posedge irq_r or posedge int_r_out or posedge flag)
+  begin
+    if (reset)
+    begin
+      myint_r <= 1'b0;  //int_r--interrput flag Register   
+      flag <= 1'b0;
+    end
+    else if(flag)
+	  myint_r <= 1'b0;
+    else if (irq_r)  
+    begin 
+      myint_r <= 1'b1;
+      flag <= 1'b1;
+    end
+    else if (int_r_out) 	
+      myint_r <= 1'b0;            //clr interrput flag       
+  end
+
+
+	always @(posedge myint_r or posedge reset or posedge int_r_out or posedge _EXCtemp)
+	begin
+		if (reset)
+		begin
+			int_r <= 1'b0;
+			EXC <= 1'b0;
+		end
+		else if (myint_r)
+		begin
+			EXC <= 1'b0;
+			int_r <= 1'b1;
+		end
+		else if (_EXCtemp)
+		begin
+			EXC <= 1'b1;
+			int_r <= 1'b1;
+		end
+		else
+		begin
+			EXC <= 1'b0;
+			int_r <= 1'b0;
+		end
+	end
+
+//=========================================	
+	INT myint(.intMDin(MD),.clk(clk),.reset(reset),.int_r(_int_r),.intEXC(_idEXCout),.intPSR(PSR),.intR6(R6),.intPC(_pc),//input				
+				.intNPC(_intPCout),.intMAout(intMAout_),.intMDout(intMDout_),.rd(int_rd),.we(int_we),.intR6out(_intR6out),//output
+						.int_r_out(int_r_out),.flag(flag_), .phase(intPhase)); //output
+						
+	wire [15:0] _intPCout, intMAout_, intMDout_, _intR6out;
+	wire int_rd, int_we, int_r_out, flag_;
+	
+	assign MA = int_r?intMAout_:_memMAout;
+	assign we = int_r?int_we : _memWE;
+	
+	reg [15:0] intMDout;
+
+	always @(intMDout_)
+	begin
+		intMDout <= intMDout_;
+    end
+	
+	wire [2:0] intPhase;
+//=========================================	
+
+	always @(_wbR0 or _wbR1 or _wbR2 or _wbR3 or _wbR4 or _wbR5 or _wbR6 or _wbR7 or _intR6out or intPhase)
+	begin
+		R0 <= _wbR0;
+		R1 <= _wbR1;
+		R2 <= _wbR2;
+		R3 <= _wbR3;
+		R4 <= _wbR4;
+		R5 <= _wbR5;
+		if (intPhase == 3'b101)
+			R6 <= _intR6out;
+		else
+			R6 <= _wbR6;
+		R7 <= _wbR7;
+	end
+
+	always @(_memRD or int_rd or int_r)
+	begin
+		if (int_r == 1'b0)
+			rd <= _memRD;
+		else
+			rd <= int_rd;
+	end
+
+	lpm_ram_dq1 i_mem(.address(_ifMA), .clock(clk_s), .data(), .wren(1'b0), 	//input
+					  .q(_i_q));	//output
+
+	wire [15:0] _i_q;
+	
+	IF myif(.clk(clk), .reset(reset), .irq(int_r), .pause(_pause), .ifMD(_i_q), .ifPC(_pc), //input
+		.ifMA(_ifMA), .ifIR(_ifidIR), .ifNPC(_ifidNPC), .ifPCout(_ifPCout));	//output
+
+	wire [15:0] _ifMA, _ifPCout;
+	wire [15:0] _ifidIR, _ifidNPC;
+	
+
+	ID myid(.clk(clk), .reset(reset), .irq(int_r), .pause(_pause), .idIRin(_ifidIR), .idNPCin(_ifidNPC), .idPSR(PSR),	//input
+		.idR0(_r0), .idR1(_r1), .idR2(_r2), .idR3(_r3), .idR4(_r4), .idR5(_r5), .idR6(_r6), .idR7(_r7),	//input
+		.idA(_idexA), .idB(_idexB), .idImm(_idexImm), .idIRout(_idexIR), .idNPCout(_idexNPC),	//output
+		.idPCout(_idPCout), .idCond(_idCond), .idEXCout(_idEXCout));	//output
+		
+	wire _idEXCout;
+	wire [15:0] _idPCout;
+	
+	wire [15:0] _idexA, _idexB;
+	wire [15:0] _idexImm;
+	wire [15:0] _idexIR, _idexNPC;
+
+	FD  myfd(._idexA(_idexA), ._idexB(_idexB), 	//input
+			 .idexIR(_idexIR), .exmemIR(_exmemIR), .memwbIR(_memwbIR),	//input
+			 .exmemALUout(_exALUoutput), .memwbDataout(_memwbData),	//input
+			 ._fd_A(_exAin), ._fd_B(_exBin));
+
+	wire [15:0] _exAin, _exBin;
+	
+	EX	myex(.clk(clk), .reset(reset), .irq(int_r), .pause(_pause), //input
+			 .exPSRin(PSR),									//input
+			 .exA(_exAin), .exB(_exBin), .exImm(_idexImm),	//input
+			 .exIRin(_idexIR), .exNPCin(_idexNPC),			//input
+			 .exIRout(_exmemIR), .exNPCout(_exmemNPC),		//input
+			 .exALUoutput(_exALUoutput), .exTMP(_exTMP),	//output
+			 .exN(_exN), .exZ(_exZ), .exP(_exP), .exVFn(_exVFn), .exVFp(_exVFp),	//output
+			 .exCond(_exCond), .exPCout(_exPCout), .exPSRout(_exPSRout));//output
+	
+	wire _exN, _exZ, _exP, _exVFn, _exVFp;
+	wire [15:0] _exmemIR, _exmemNPC, _exALUoutput, _exTMP;
+	
+	
+	MEM	mymem(.reset(reset), .clk(clk), .irq(int_r), 			//input
+			.memALUoutput(_exALUoutput), .memTMP(_exTMP),	//input
+			.memIRin(_exmemIR), .memNPCin(_exmemNPC),		//input
+			.memMD(MD), .memMD_out(_memMDout),		//MDinput & MDoutput
+			.memRD(_memRD), .memWE(_memWE), .memMA(_memMAout),			//output
+			.memIRout(_memwbIR), .memNPCout(_memwbNPC), .memData(_memwbData),	//output
+			.Pause(_pause), .memPSR(_memPSR), .memPCout(_memPCout), .memCond(_memCond),	//output
+			.memN(_memN), .memZ(_memZ), .memP(_memP));	//output
+	
+	wire _pause;	//for indirect instructions(LDI STI RTI)
+	wire _memRD, _memWE;
+	wire [15:0] _memwbIR, _memwbNPC, _memwbData, _memMAout;
+	wire [15:0] _memPSR;
+	wire _memN, _memZ, _memP;
+
+	WB mywb(.reset(reset), .clk(clk), .irq(int_r), .pause(_pause),//input
+		.wbIR(_memwbIR), .wbNPC(_memwbNPC), .wbData(_memwbData), .phase(intPhase),//input
+	   .wbR0(_wbR0), .wbR1(_wbR1), .wbR2(_wbR2), .wbR3(_wbR3), .wbR4(_wbR4), .wbR5(_wbR5), .wbR6(_wbR6), .wbR7(_wbR7),
+		.wbINTF(_wbINTF));//output		   	 	  			
+
+	wire [15:0] _wbR0, _wbR1, _wbR2, _wbR3, _wbR4, _wbR5, _wbR6, _wbR7;
+	wire _wbINTF;
+
+	// write memory
+	
+	wire [15:0] _memMDout;
+	reg [15:0] MD_out;
+
+	always @(_memMDout)
+	begin
+		MD_out <= _memMDout;
+    end
+	assign MD = we?(int_r?intMDout_:MD_out):16'hzzzz;
+
+endmodule

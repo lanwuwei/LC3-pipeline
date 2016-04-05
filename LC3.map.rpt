@@ -1,0 +1,709 @@
+Analysis & Synthesis report for LC3
+Fri May 24 19:04:31 2013
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. Analysis & Synthesis RAM Summary
+  8. User-Specified and Inferred Latches
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 12. Source assignments for LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component|altsyncram_l9f1:auto_generated
+ 13. Source assignments for lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated
+ 14. Parameter Settings for User Entity Instance: LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component
+ 15. Parameter Settings for User Entity Instance: lpm_ram_dq0:inst1|altsyncram:altsyncram_component
+ 16. altsyncram Parameter Settings by Entity Instance
+ 17. Port Connectivity Checks: "LC3_sim:inst|WB:mywb"
+ 18. Port Connectivity Checks: "LC3_sim:inst|MEM:mymem"
+ 19. Port Connectivity Checks: "LC3_sim:inst|lpm_ram_dq1:i_mem"
+ 20. Port Connectivity Checks: "LC3_sim:inst|INT:myint"
+ 21. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                             ;
++-------------------------------+------------------------------------------+
+; Analysis & Synthesis Status   ; Successful - Fri May 24 19:04:31 2013    ;
+; Quartus II Version            ; 9.0 Build 132 02/25/2009 SJ Full Version ;
+; Revision Name                 ; LC3                                      ;
+; Top-level Entity Name         ; LC3                                      ;
+; Family                        ; Stratix II                               ;
+; Logic utilization             ; N/A                                      ;
+;     Combinational ALUTs       ; 1,004                                    ;
+;     Dedicated logic registers ; 486                                      ;
+; Total registers               ; 486                                      ;
+; Total pins                    ; 612                                      ;
+; Total virtual pins            ; 0                                        ;
+; Total block memory bits       ; 147,456                                  ;
+; DSP block 9-bit elements      ; 0                                        ;
+; Total PLLs                    ; 0                                        ;
+; Total DLLs                    ; 0                                        ;
++-------------------------------+------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                            ;
++----------------------------------------------------------------+--------------------+--------------------+
+; Option                                                         ; Setting            ; Default Value      ;
++----------------------------------------------------------------+--------------------+--------------------+
+; Device                                                         ; EP2S180F1508I4     ;                    ;
+; Top-level entity name                                          ; LC3                ; LC3                ;
+; Family name                                                    ; Stratix II         ; Stratix            ;
+; Use smart compilation                                          ; Off                ; Off                ;
+; Restructure Multiplexers                                       ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                            ; Off                ; Off                ;
+; Preserve fewer node names                                      ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                      ; Off                ; Off                ;
+; Verilog Version                                                ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                   ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                       ; Auto               ; Auto               ;
+; Safe State Machine                                             ; Off                ; Off                ;
+; Extract Verilog State Machines                                 ; On                 ; On                 ;
+; Extract VHDL State Machines                                    ; On                 ; On                 ;
+; Ignore Verilog initial constructs                              ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                     ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                 ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                        ; On                 ; On                 ;
+; Parallel Synthesis                                             ; Off                ; Off                ;
+; DSP Block Balancing                                            ; Auto               ; Auto               ;
+; Maximum DSP Block Usage                                        ; -1                 ; -1                 ;
+; NOT Gate Push-Back                                             ; On                 ; On                 ;
+; Power-Up Don't Care                                            ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                   ; Off                ; Off                ;
+; Remove Duplicate Registers                                     ; On                 ; On                 ;
+; Ignore CARRY Buffers                                           ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                         ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                      ; Off                ; Off                ;
+; Ignore LCELL Buffers                                           ; Off                ; Off                ;
+; Ignore SOFT Buffers                                            ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                 ; Off                ; Off                ;
+; Optimization Technique                                         ; Balanced           ; Balanced           ;
+; Carry Chain Length                                             ; 70                 ; 70                 ;
+; Auto Carry Chains                                              ; On                 ; On                 ;
+; Auto Open-Drain Pins                                           ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                          ; Off                ; Off                ;
+; Auto ROM Replacement                                           ; On                 ; On                 ;
+; Auto RAM Replacement                                           ; On                 ; On                 ;
+; Auto DSP Block Replacement                                     ; On                 ; On                 ;
+; Auto Shift Register Replacement                                ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                  ; On                 ; On                 ;
+; Strict RAM Replacement                                         ; Off                ; Off                ;
+; Allow Synchronous Control Signals                              ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                         ; Off                ; Off                ;
+; Auto RAM Block Balancing                                       ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                              ; Off                ; Off                ;
+; Auto Resource Sharing                                          ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                             ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                             ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                  ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing            ; On                 ; On                 ;
+; Maximum Number of M512 Memory Blocks                           ; -1                 ; -1                 ;
+; Maximum Number of M4K/M9K Memory Blocks                        ; -1                 ; -1                 ;
+; Maximum Number of M-RAM/M144K Memory Blocks                    ; -1                 ; -1                 ;
+; Ignore translate_off and synthesis_off directives              ; Off                ; Off                ;
+; Timing-Driven Synthesis                                        ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report             ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                             ; Off                ; Off                ;
+; Synchronization Register Chain Length                          ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                   ; Normal compilation ; Normal compilation ;
+; HDL message level                                              ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report       ; 100                ; 100                ;
+; Number of Inverted Registers Reported in Synthesis Report      ; 100                ; 100                ;
+; Clock MUX Protection                                           ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                    ; Off                ; Off                ;
+; Block Design Naming                                            ; Auto               ; Auto               ;
+; SDC constraint protection                                      ; Off                ; Off                ;
+; Synthesis Effort                                               ; Auto               ; Auto               ;
+; Allows Asynchronous Clear Usage For Shift Register Replacement ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                             ; Medium             ; Medium             ;
++----------------------------------------------------------------+--------------------+--------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                       ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                       ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------+
+; INT.v                            ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/INT.v                                     ;
+; IF.v                             ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/IF.v                                      ;
+; ID.v                             ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/ID.v                                      ;
+; EX.v                             ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/EX.v                                      ;
+; MEM.v                            ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/MEM.v                                     ;
+; WB.v                             ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/WB.v                                      ;
+; FD.v                             ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/FD.v                                      ;
+; LC3_sim.v                        ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/LC3_sim.v                                 ;
+; LC3.bdf                          ; yes             ; User Block Diagram/Schematic File  ; E:/体系结构新案/LC3_pipe/LC3.bdf                                   ;
+; lpm_ram_dq0.v                    ; yes             ; User Wizard-Generated File         ; E:/体系结构新案/LC3_pipe/lpm_ram_dq0.v                             ;
+; lpm_ram_dq1.v                    ; yes             ; User Wizard-Generated File         ; E:/体系结构新案/LC3_pipe/lpm_ram_dq1.v                             ;
+; PCMUX.v                          ; yes             ; User Verilog HDL File              ; E:/体系结构新案/LC3_pipe/PCMUX.v                                   ;
+; altsyncram.tdf                   ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/altsyncram.tdf        ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/stratix_ram_block.inc ;
+; lpm_mux.inc                      ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/lpm_mux.inc           ;
+; lpm_decode.inc                   ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/lpm_decode.inc        ;
+; aglobal90.inc                    ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/aglobal90.inc         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/a_rdenreg.inc         ;
+; altrom.inc                       ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/altrom.inc            ;
+; altram.inc                       ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/altram.inc            ;
+; altdpram.inc                     ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/altdpram.inc          ;
+; altqpram.inc                     ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/megafunctions/altqpram.inc          ;
+; db/altsyncram_l9f1.tdf           ; yes             ; Auto-Generated Megafunction        ; E:/体系结构新案/LC3_pipe/db/altsyncram_l9f1.tdf                    ;
+; 74244b.bdf                       ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/others/maxplus2/74244b.bdf          ;
+; 7404.bdf                         ; yes             ; Megafunction                       ; c:/altera/90/quartus/libraries/others/maxplus2/7404.bdf            ;
+; db/altsyncram_5af1.tdf           ; yes             ; Auto-Generated Megafunction        ; E:/体系结构新案/LC3_pipe/db/altsyncram_5af1.tdf                    ;
+; db/decode_3pa.tdf                ; yes             ; Auto-Generated Megafunction        ; E:/体系结构新案/LC3_pipe/db/decode_3pa.tdf                         ;
+; db/mux_2lb.tdf                   ; yes             ; Auto-Generated Megafunction        ; E:/体系结构新案/LC3_pipe/db/mux_2lb.tdf                            ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------+
+
+
++--------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary            ;
++-----------------------------------------------+--------+
+; Resource                                      ; Usage  ;
++-----------------------------------------------+--------+
+; Estimated ALUTs Used                          ; 1004   ;
+; Dedicated logic registers                     ; 486    ;
+;                                               ;        ;
+; Estimated ALUTs Unavailable                   ; 140    ;
+;                                               ;        ;
+; Total combinational functions                 ; 1004   ;
+; Combinational ALUT usage by number of inputs  ;        ;
+;     -- 7 input functions                      ; 5      ;
+;     -- 6 input functions                      ; 227    ;
+;     -- 5 input functions                      ; 307    ;
+;     -- 4 input functions                      ; 132    ;
+;     -- <=3 input functions                    ; 333    ;
+;                                               ;        ;
+; Combinational ALUTs by mode                   ;        ;
+;     -- normal mode                            ; 845    ;
+;     -- extended LUT mode                      ; 5      ;
+;     -- arithmetic mode                        ; 154    ;
+;     -- shared arithmetic mode                 ; 0      ;
+;                                               ;        ;
+; Estimated ALUT/register pairs used            ; 1248   ;
+;                                               ;        ;
+; Total registers                               ; 486    ;
+;     -- Dedicated logic registers              ; 486    ;
+;     -- I/O registers                          ; 0      ;
+;                                               ;        ;
+; Estimated ALMs:  partially or completely used ; 633    ;
+;                                               ;        ;
+; I/O pins                                      ; 612    ;
+; Total block memory bits                       ; 147456 ;
+; Maximum fan-out node                          ; clk    ;
+; Maximum fan-out                               ; 530    ;
+; Total fan-out                                 ; 7280   ;
+; Average fan-out                               ; 3.39   ;
++-----------------------------------------------+--------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                  ;
++----------------------------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                      ; Library Name ;
++----------------------------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------+--------------+
+; |LC3                                         ; 1004 (1)          ; 486 (0)      ; 147456            ; 0            ; 0       ; 0         ; 0         ; 612  ; 0            ; |LC3                                                                                                     ; work         ;
+;    |74244b:inst3|                            ; 11 (11)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|74244b:inst3                                                                                        ; work         ;
+;    |74244b:inst5|                            ; 16 (16)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|74244b:inst5                                                                                        ; work         ;
+;    |LC3_sim:inst|                            ; 958 (123)         ; 485 (11)     ; 16384             ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst                                                                                        ; work         ;
+;       |EX:myex|                              ; 286 (286)         ; 86 (86)      ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|EX:myex                                                                                ; work         ;
+;       |FD:myfd|                              ; 64 (64)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|FD:myfd                                                                                ; work         ;
+;       |ID:myid|                              ; 206 (206)         ; 91 (91)      ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|ID:myid                                                                                ; work         ;
+;       |IF:myif|                              ; 15 (15)           ; 47 (47)      ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|IF:myif                                                                                ; work         ;
+;       |INT:myint|                            ; 86 (86)           ; 36 (36)      ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|INT:myint                                                                              ; work         ;
+;       |MEM:mymem|                            ; 93 (93)           ; 85 (85)      ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|MEM:mymem                                                                              ; work         ;
+;       |PCMUX:mypcmux|                        ; 48 (48)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|PCMUX:mypcmux                                                                          ; work         ;
+;       |WB:mywb|                              ; 37 (37)           ; 129 (129)    ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|WB:mywb                                                                                ; work         ;
+;       |lpm_ram_dq1:i_mem|                    ; 0 (0)             ; 0 (0)        ; 16384             ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|lpm_ram_dq1:i_mem                                                                      ; work         ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 16384             ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component                                      ; work         ;
+;             |altsyncram_l9f1:auto_generated| ; 0 (0)             ; 0 (0)        ; 16384             ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component|altsyncram_l9f1:auto_generated       ; work         ;
+;    |lpm_ram_dq0:inst1|                       ; 18 (0)            ; 1 (0)        ; 131072            ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|lpm_ram_dq0:inst1                                                                                   ; work         ;
+;       |altsyncram:altsyncram_component|      ; 18 (0)            ; 1 (0)        ; 131072            ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|lpm_ram_dq0:inst1|altsyncram:altsyncram_component                                                   ; work         ;
+;          |altsyncram_5af1:auto_generated|    ; 18 (0)            ; 1 (1)        ; 131072            ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated                    ; work         ;
+;             |decode_3pa:decode3|             ; 2 (2)             ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated|decode_3pa:decode3 ; work         ;
+;             |mux_2lb:mux2|                   ; 16 (16)           ; 0 (0)        ; 0                 ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |LC3|lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated|mux_2lb:mux2       ; work         ;
++----------------------------------------------+-------------------+--------------+-------------------+--------------+---------+-----------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                 ;
++----------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+--------+-------------+
+; Name                                                                                                     ; Type ; Mode        ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF         ;
++----------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+--------+-------------+
+; LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component|altsyncram_l9f1:auto_generated|ALTSYNCRAM ; M4K  ; Single Port ; 1024         ; 16           ; --           ; --           ; 16384  ; LC3_mif.mif ;
+; lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated|ALTSYNCRAM              ; M4K  ; Single Port ; 8192         ; 16           ; --           ; --           ; 131072 ; lc3_mif.mif ;
++----------------------------------------------------------------------------------------------------------+------+-------------+--------------+--------------+--------------+--------------+--------+-------------+
+
+
++------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                  ;
++----------------------------------------------------+------------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal    ; Free of Timing Hazards ;
++----------------------------------------------------+------------------------+------------------------+
+; LC3_sim:inst|flag                                  ; LC3_sim:inst|myint_r~0 ; yes                    ;
+; Number of user-specified and inferred latches = 1  ;                        ;                        ;
++----------------------------------------------------+------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                  ;
++----------------------------------------+--------------------------------------------+
+; Register name                          ; Reason for Removal                         ;
++----------------------------------------+--------------------------------------------+
+; LC3_sim:inst|_PSR[6..14]               ; Merged with LC3_sim:inst|_PSR[5]           ;
+; LC3_sim:inst|IF:myif|ifMA[0]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[0]  ;
+; LC3_sim:inst|IF:myif|ifMA[1]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[1]  ;
+; LC3_sim:inst|IF:myif|ifMA[2]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[2]  ;
+; LC3_sim:inst|IF:myif|ifMA[3]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[3]  ;
+; LC3_sim:inst|IF:myif|ifMA[4]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[4]  ;
+; LC3_sim:inst|IF:myif|ifMA[5]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[5]  ;
+; LC3_sim:inst|IF:myif|ifMA[6]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[6]  ;
+; LC3_sim:inst|IF:myif|ifMA[7]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[7]  ;
+; LC3_sim:inst|IF:myif|ifMA[8]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[8]  ;
+; LC3_sim:inst|IF:myif|ifMA[9]           ; Merged with LC3_sim:inst|IF:myif|ifNPC[9]  ;
+; LC3_sim:inst|IF:myif|ifMA[10]          ; Merged with LC3_sim:inst|IF:myif|ifNPC[10] ;
+; LC3_sim:inst|IF:myif|ifMA[11]          ; Merged with LC3_sim:inst|IF:myif|ifNPC[11] ;
+; LC3_sim:inst|IF:myif|ifMA[12]          ; Merged with LC3_sim:inst|IF:myif|ifNPC[12] ;
+; LC3_sim:inst|IF:myif|ifMA[13]          ; Merged with LC3_sim:inst|IF:myif|ifNPC[13] ;
+; LC3_sim:inst|IF:myif|ifMA[14]          ; Merged with LC3_sim:inst|IF:myif|ifNPC[14] ;
+; LC3_sim:inst|IF:myif|ifMA[15]          ; Merged with LC3_sim:inst|IF:myif|ifNPC[15] ;
+; LC3_sim:inst|_PSR[5]                   ; Stuck at GND due to stuck port data_in     ;
+; LC3_sim:inst|ID:myid|idImm[9..15]      ; Merged with LC3_sim:inst|ID:myid|idImm[8]  ;
+; LC3_sim:inst|IF:myif|ifPCout[0]        ; Merged with LC3_sim:inst|IF:myif|ifNPC[0]  ;
+; LC3_sim:inst|_PSR[15]                  ; Stuck at VCC due to stuck port data_in     ;
+; Total Number of Removed Registers = 35 ;                                            ;
++----------------------------------------+--------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 486   ;
+; Number of registers using Synchronous Clear  ; 59    ;
+; Number of registers using Synchronous Load   ; 78    ;
+; Number of registers using Asynchronous Clear ; 6     ;
+; Number of registers using Asynchronous Load  ; 4     ;
+; Number of registers using Clock Enable       ; 424   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
+; 3:1                ; 16 bits   ; 32 ALUTs      ; 16 ALUTs             ; 16 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|ID:myid|idIRout[8]     ;
+; 3:1                ; 16 bits   ; 32 ALUTs      ; 0 ALUTs              ; 32 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|EX:myex|exPCout[3]     ;
+; 3:1                ; 16 bits   ; 32 ALUTs      ; 0 ALUTs              ; 32 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|MEM:mymem|MA_TMP[15]   ;
+; 3:1                ; 48 bits   ; 96 ALUTs      ; 0 ALUTs              ; 96 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|IF:myif|ifPCout[9]     ;
+; 4:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; Yes        ; |LC3|LC3_sim:inst|_EXCflag               ;
+; 10:1               ; 3 bits    ; 18 ALUTs      ; 15 ALUTs             ; 3 ALUTs                ; Yes        ; |LC3|LC3_sim:inst|INT:myint|phase[0]     ;
+; 17:1               ; 2 bits    ; 22 ALUTs      ; 6 ALUTs              ; 16 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|MEM:mymem|memP         ;
+; 11:1               ; 16 bits   ; 112 ALUTs     ; 0 ALUTs              ; 112 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|ID:myid|idPCout[8]     ;
+; 12:1               ; 16 bits   ; 128 ALUTs     ; 0 ALUTs              ; 128 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR7[6]        ;
+; 12:1               ; 16 bits   ; 128 ALUTs     ; 0 ALUTs              ; 128 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR5[7]        ;
+; 12:1               ; 16 bits   ; 128 ALUTs     ; 0 ALUTs              ; 128 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR4[6]        ;
+; 12:1               ; 16 bits   ; 128 ALUTs     ; 0 ALUTs              ; 128 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR3[12]       ;
+; 12:1               ; 16 bits   ; 128 ALUTs     ; 0 ALUTs              ; 128 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR2[5]        ;
+; 12:1               ; 16 bits   ; 128 ALUTs     ; 0 ALUTs              ; 128 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR1[4]        ;
+; 12:1               ; 16 bits   ; 128 ALUTs     ; 0 ALUTs              ; 128 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR0[0]        ;
+; 7:1                ; 4 bits    ; 16 ALUTs      ; 0 ALUTs              ; 16 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|ID:myid|idImm[1]       ;
+; 9:1                ; 16 bits   ; 96 ALUTs      ; 0 ALUTs              ; 96 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|MEM:mymem|memPCout[1]  ;
+; 14:1               ; 15 bits   ; 135 ALUTs     ; 0 ALUTs              ; 135 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|WB:mywb|wbR6[12]       ;
+; 21:1               ; 3 bits    ; 42 ALUTs      ; 6 ALUTs              ; 36 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|EX:myex|exZ            ;
+; 23:1               ; 16 bits   ; 240 ALUTs     ; 96 ALUTs             ; 144 ALUTs              ; Yes        ; |LC3|LC3_sim:inst|ID:myid|idB[0]         ;
+; 11:1               ; 2 bits    ; 14 ALUTs      ; 4 ALUTs              ; 10 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|ID:myid|idImm[7]       ;
+; 18:1               ; 10 bits   ; 120 ALUTs     ; 60 ALUTs             ; 60 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|ID:myid|idA[7]         ;
+; 18:1               ; 6 bits    ; 72 ALUTs      ; 36 ALUTs             ; 36 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|ID:myid|idA[3]         ;
+; 14:1               ; 14 bits   ; 126 ALUTs     ; 28 ALUTs             ; 98 ALUTs               ; Yes        ; |LC3|LC3_sim:inst|MEM:mymem|memData[11]  ;
+; 3:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; No         ; |LC3|LC3_sim:inst|EX:myex|ShiftLeft0     ;
+; 3:1                ; 8 bits    ; 16 ALUTs      ; 16 ALUTs             ; 0 ALUTs                ; No         ; |LC3|LC3_sim:inst|EX:myex|ShiftLeft0     ;
+; 4:1                ; 2 bits    ; 4 ALUTs       ; 4 ALUTs              ; 0 ALUTs                ; No         ; |LC3|LC3_sim:inst|PSR[3]                 ;
+; 4:1                ; 3 bits    ; 6 ALUTs       ; 6 ALUTs              ; 0 ALUTs                ; No         ; |LC3|LC3_sim:inst|PSR[1]                 ;
+; 8:1                ; 16 bits   ; 80 ALUTs      ; 80 ALUTs             ; 0 ALUTs                ; No         ; |LC3|LC3_sim:inst|ID:myid|Mux44          ;
+; 4:1                ; 10 bits   ; 20 ALUTs      ; 20 ALUTs             ; 0 ALUTs                ; No         ; |LC3|LC3_sim:inst|INT:myint|intMDout[7]  ;
+; 5:1                ; 16 bits   ; 48 ALUTs      ; 48 ALUTs             ; 0 ALUTs                ; No         ; |LC3|LC3_sim:inst|PCMUX:mypcmux|PCval[3] ;
+; 10:1               ; 21 bits   ; 126 ALUTs     ; 84 ALUTs             ; 42 ALUTs               ; No         ; |LC3|LC3_sim:inst|INT:myint|intMDout[1]  ;
+; 17:1               ; 16 bits   ; 176 ALUTs     ; 64 ALUTs             ; 112 ALUTs              ; No         ; |LC3|LC3_sim:inst|MEM:mymem|Selector8    ;
+; 10:1               ; 15 bits   ; 90 ALUTs      ; 75 ALUTs             ; 15 ALUTs               ; No         ; |LC3|LC3_sim:inst|MA[14]                 ;
+; 18:1               ; 16 bits   ; 192 ALUTs     ; 32 ALUTs             ; 160 ALUTs              ; No         ; |LC3|LC3_sim:inst|FD:myfd|_fd_B[15]      ;
+; 23:1               ; 4 bits    ; 60 ALUTs      ; 48 ALUTs             ; 12 ALUTs               ; No         ; |LC3|LC3_sim:inst|EX:myex|Mux29          ;
+; 23:1               ; 4 bits    ; 60 ALUTs      ; 48 ALUTs             ; 12 ALUTs               ; No         ; |LC3|LC3_sim:inst|EX:myex|Mux25          ;
+; 24:1               ; 3 bits    ; 48 ALUTs      ; 36 ALUTs             ; 12 ALUTs               ; No         ; |LC3|LC3_sim:inst|EX:myex|Mux22          ;
+; 24:1               ; 3 bits    ; 48 ALUTs      ; 36 ALUTs             ; 12 ALUTs               ; No         ; |LC3|LC3_sim:inst|EX:myex|Mux33          ;
+; 18:1               ; 16 bits   ; 192 ALUTs     ; 32 ALUTs             ; 160 ALUTs              ; No         ; |LC3|LC3_sim:inst|FD:myfd|_fd_A[11]      ;
+; 3:1                ; 16 bits   ; 32 ALUTs      ; 16 ALUTs             ; 16 ALUTs               ; No         ; |LC3|LC3_sim:inst|EX:myex|Add0           ;
+; 4:1                ; 16 bits   ; 32 ALUTs      ; 16 ALUTs             ; 16 ALUTs               ; No         ; |LC3|LC3_sim:inst|EX:myex|Add0           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Source assignments for LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component|altsyncram_l9f1:auto_generated ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                     ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                      ;
++---------------------------------+--------------------+------+--------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------+
+; Source assignments for lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated ;
++---------------------------------+--------------------+------+-------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                        ;
++---------------------------------+--------------------+------+-------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                         ;
++---------------------------------+--------------------+------+-------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+-------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                            ;
++------------------------------------+----------------------+-------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                         ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                      ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                    ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                    ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                  ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                         ;
+; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                                         ;
+; WIDTH_A                            ; 16                   ; Signed Integer                                  ;
+; WIDTHAD_A                          ; 10                   ; Signed Integer                                  ;
+; NUMWORDS_A                         ; 1024                 ; Signed Integer                                  ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                         ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                         ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                         ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                         ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                         ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                         ;
+; WIDTH_B                            ; 1                    ; Untyped                                         ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                         ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                         ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                         ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                         ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                         ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                         ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                         ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                         ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                         ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                         ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                         ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                         ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                         ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                         ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                  ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                         ;
+; RAM_BLOCK_TYPE                     ; M4K                  ; Untyped                                         ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                         ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                         ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                         ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                         ;
+; INIT_FILE                          ; LC3_mif.mif          ; Untyped                                         ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                         ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                         ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                         ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                         ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                         ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                         ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                         ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                         ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                         ;
+; DEVICE_FAMILY                      ; Stratix II           ; Untyped                                         ;
+; CBXI_PARAMETER                     ; altsyncram_l9f1      ; Untyped                                         ;
++------------------------------------+----------------------+-------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: lpm_ram_dq0:inst1|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+------------------------------------+
+; Parameter Name                     ; Value                ; Type                               ;
++------------------------------------+----------------------+------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                            ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                         ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                       ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                       ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                     ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                            ;
+; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                            ;
+; WIDTH_A                            ; 16                   ; Signed Integer                     ;
+; WIDTHAD_A                          ; 13                   ; Signed Integer                     ;
+; NUMWORDS_A                         ; 8192                 ; Signed Integer                     ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                            ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                            ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                            ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                            ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                            ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                            ;
+; WIDTH_B                            ; 1                    ; Untyped                            ;
+; WIDTHAD_B                          ; 1                    ; Untyped                            ;
+; NUMWORDS_B                         ; 1                    ; Untyped                            ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                            ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                            ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                            ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                            ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                            ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                            ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                            ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                            ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                            ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                            ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                            ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                            ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                     ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                            ;
+; RAM_BLOCK_TYPE                     ; M4K                  ; Untyped                            ;
+; BYTE_SIZE                          ; 8                    ; Untyped                            ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                            ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                            ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                            ;
+; INIT_FILE                          ; lc3_mif.mif          ; Untyped                            ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                            ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                            ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                            ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                            ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                            ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                            ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                            ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                            ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                            ;
+; DEVICE_FAMILY                      ; Stratix II           ; Untyped                            ;
+; CBXI_PARAMETER                     ; altsyncram_5af1      ; Untyped                            ;
++------------------------------------+----------------------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                           ;
++-------------------------------------------+----------------------------------------------------------------+
+; Name                                      ; Value                                                          ;
++-------------------------------------------+----------------------------------------------------------------+
+; Number of entity instances                ; 2                                                              ;
+; Entity Instance                           ; LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                                    ;
+;     -- WIDTH_A                            ; 16                                                             ;
+;     -- NUMWORDS_A                         ; 1024                                                           ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                   ;
+;     -- WIDTH_B                            ; 1                                                              ;
+;     -- NUMWORDS_B                         ; 1                                                              ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                         ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                   ;
+;     -- RAM_BLOCK_TYPE                     ; M4K                                                            ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                      ;
+; Entity Instance                           ; lpm_ram_dq0:inst1|altsyncram:altsyncram_component              ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                                    ;
+;     -- WIDTH_A                            ; 16                                                             ;
+;     -- NUMWORDS_A                         ; 8192                                                           ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                   ;
+;     -- WIDTH_B                            ; 1                                                              ;
+;     -- NUMWORDS_B                         ; 1                                                              ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                         ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                   ;
+;     -- RAM_BLOCK_TYPE                     ; M4K                                                            ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                      ;
++-------------------------------------------+----------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "LC3_sim:inst|WB:mywb"                                                                                     ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                                                  ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; wbEXC ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "LC3_sim:inst|MEM:mymem"                                                               ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; memPSR ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "LC3_sim:inst|lpm_ram_dq1:i_mem"                                                                                                                                                      ;
++---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                                                                                                            ;
++---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; address ; Input ; Warning  ; Input port expression (16 bits) is wider than the input port (13 bits) it drives.  The 3 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; data    ; Input ; Info     ; Explicitly unconnected                                                                                                                                                             ;
+; wren    ; Input ; Info     ; Stuck at GND                                                                                                                                                                       ;
++---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "LC3_sim:inst|INT:myint"                                                                                      ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; intPMout ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 9.0 Build 132 02/25/2009 SJ Full Version
+    Info: Processing started: Fri May 24 19:04:20 2013
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off LC3 -c LC3
+Info: Found 1 design units, including 1 entities, in source file INT.v
+    Info: Found entity 1: INT
+Info: Found 1 design units, including 1 entities, in source file IF.v
+    Info: Found entity 1: IF
+Info: Found 1 design units, including 1 entities, in source file ID.v
+    Info: Found entity 1: ID
+Info: Found 1 design units, including 1 entities, in source file EX.v
+    Info: Found entity 1: EX
+Info: Found 1 design units, including 1 entities, in source file MEM.v
+    Info: Found entity 1: MEM
+Info: Found 1 design units, including 1 entities, in source file WB.v
+    Info: Found entity 1: WB
+Info: Found 1 design units, including 1 entities, in source file FD.v
+    Info: Found entity 1: FD
+Info: Found 1 design units, including 1 entities, in source file LC3_sim.v
+    Info: Found entity 1: LC3_sim
+Info: Found 1 design units, including 1 entities, in source file LC3.bdf
+    Info: Found entity 1: LC3
+Info: Found 1 design units, including 1 entities, in source file lpm_ram_dq0.v
+    Info: Found entity 1: lpm_ram_dq0
+Info: Found 1 design units, including 1 entities, in source file lpm_ram_dq1.v
+    Info: Found entity 1: lpm_ram_dq1
+Info: Found 1 design units, including 1 entities, in source file PCMUX.v
+    Info: Found entity 1: PCMUX
+Info: Elaborating entity "LC3" for the top level hierarchy
+Info: Elaborating entity "LC3_sim" for hierarchy "LC3_sim:inst"
+Critical Warning (10237): Verilog HDL warning at LC3_sim.v(103): can't infer register for assignment in edge-triggered always construct because the clock isn't obvious. Generated combinational logic instead
+Warning (10235): Verilog HDL Always Construct warning at LC3_sim.v(122): variable "_PSR" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10240): Verilog HDL Always Construct warning at LC3_sim.v(166): inferring latch(es) for variable "flag", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "flag" at LC3_sim.v(166)
+Info: Elaborating entity "PCMUX" for hierarchy "LC3_sim:inst|PCMUX:mypcmux"
+Info: Elaborating entity "INT" for hierarchy "LC3_sim:inst|INT:myint"
+Info: Elaborating entity "lpm_ram_dq1" for hierarchy "LC3_sim:inst|lpm_ram_dq1:i_mem"
+Info: Elaborating entity "altsyncram" for hierarchy "LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component"
+Info: Instantiated megafunction "LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component" with the following parameter:
+    Info: Parameter "address_aclr_a" = "NONE"
+    Info: Parameter "indata_aclr_a" = "NONE"
+    Info: Parameter "init_file" = "LC3_mif.mif"
+    Info: Parameter "intended_device_family" = "Cyclone"
+    Info: Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info: Parameter "lpm_type" = "altsyncram"
+    Info: Parameter "numwords_a" = "1024"
+    Info: Parameter "operation_mode" = "SINGLE_PORT"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info: Parameter "power_up_uninitialized" = "FALSE"
+    Info: Parameter "ram_block_type" = "M4K"
+    Info: Parameter "widthad_a" = "10"
+    Info: Parameter "width_a" = "16"
+    Info: Parameter "width_byteena_a" = "1"
+    Info: Parameter "wrcontrol_aclr_a" = "NONE"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_l9f1.tdf
+    Info: Found entity 1: altsyncram_l9f1
+Info: Elaborating entity "altsyncram_l9f1" for hierarchy "LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component|altsyncram_l9f1:auto_generated"
+Info: Elaborating entity "IF" for hierarchy "LC3_sim:inst|IF:myif"
+Info: Elaborating entity "ID" for hierarchy "LC3_sim:inst|ID:myid"
+Info: Elaborating entity "FD" for hierarchy "LC3_sim:inst|FD:myfd"
+Info: Elaborating entity "EX" for hierarchy "LC3_sim:inst|EX:myex"
+Info: Elaborating entity "MEM" for hierarchy "LC3_sim:inst|MEM:mymem"
+Info: Elaborating entity "WB" for hierarchy "LC3_sim:inst|WB:mywb"
+Info: Elaborating entity "74244b" for hierarchy "74244b:inst5"
+Info: Elaborated megafunction instantiation "74244b:inst5"
+Info: Elaborating entity "7404" for hierarchy "7404:inst6"
+Info: Elaborated megafunction instantiation "7404:inst6"
+Info: Elaborating entity "lpm_ram_dq0" for hierarchy "lpm_ram_dq0:inst1"
+Info: Elaborating entity "altsyncram" for hierarchy "lpm_ram_dq0:inst1|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "lpm_ram_dq0:inst1|altsyncram:altsyncram_component"
+Info: Instantiated megafunction "lpm_ram_dq0:inst1|altsyncram:altsyncram_component" with the following parameter:
+    Info: Parameter "address_aclr_a" = "NONE"
+    Info: Parameter "indata_aclr_a" = "NONE"
+    Info: Parameter "init_file" = "lc3_mif.mif"
+    Info: Parameter "intended_device_family" = "Cyclone"
+    Info: Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info: Parameter "lpm_type" = "altsyncram"
+    Info: Parameter "numwords_a" = "8192"
+    Info: Parameter "operation_mode" = "SINGLE_PORT"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info: Parameter "power_up_uninitialized" = "FALSE"
+    Info: Parameter "ram_block_type" = "M4K"
+    Info: Parameter "widthad_a" = "13"
+    Info: Parameter "width_a" = "16"
+    Info: Parameter "width_byteena_a" = "1"
+    Info: Parameter "wrcontrol_aclr_a" = "NONE"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_5af1.tdf
+    Info: Found entity 1: altsyncram_5af1
+Info: Elaborating entity "altsyncram_5af1" for hierarchy "lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/decode_3pa.tdf
+    Info: Found entity 1: decode_3pa
+Info: Elaborating entity "decode_3pa" for hierarchy "lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated|decode_3pa:decode3"
+Info: Elaborating entity "decode_3pa" for hierarchy "lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated|decode_3pa:deep_decode"
+Info: Found 1 design units, including 1 entities, in source file db/mux_2lb.tdf
+    Info: Found entity 1: mux_2lb
+Info: Elaborating entity "mux_2lb" for hierarchy "lpm_ram_dq0:inst1|altsyncram:altsyncram_component|altsyncram_5af1:auto_generated|mux_2lb:mux2"
+Warning (12020): Port "address_a" on the entity instantiation of "altsyncram_component" is connected to a signal of width 13. The formal width of the signal in the module is 10.  The extra bits will be ignored.
+Warning: 3 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: Output pins are stuck at VCC or GND
+    Warning (13410): Pin "_exPSRout[15]" is stuck at VCC
+    Warning (13410): Pin "_exPSRout[14]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[13]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[12]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[11]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[10]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[9]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[8]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[7]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[6]" is stuck at GND
+    Warning (13410): Pin "_exPSRout[5]" is stuck at GND
+Info: Implemented 1995 device resources after synthesis - the final resource count might be different
+    Info: Implemented 3 input pins
+    Info: Implemented 593 output pins
+    Info: Implemented 16 bidirectional pins
+    Info: Implemented 1335 logic cells
+    Info: Implemented 48 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 17 warnings
+    Info: Peak virtual memory: 214 megabytes
+    Info: Processing ended: Fri May 24 19:04:31 2013
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:11
+
+

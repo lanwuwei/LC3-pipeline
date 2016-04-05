@@ -1,0 +1,17 @@
+Fitter Status : Successful - Fri May 24 19:05:34 2013
+Quartus II Version : 9.0 Build 132 02/25/2009 SJ Full Version
+Revision Name : LC3
+Top-level Entity Name : LC3
+Family : Stratix II
+Device : EP2S180F1508I4
+Timing Models : Final
+Logic utilization : < 1 %
+    Combinational ALUTs : 1,023 / 143,520 ( < 1 % )
+    Dedicated logic registers : 486 / 143,520 ( < 1 % )
+Total registers : 486
+Total pins : 612 / 1,171 ( 52 % )
+Total virtual pins : 0
+Total block memory bits : 147,456 / 9,383,040 ( 2 % )
+DSP block 9-bit elements : 0 / 768 ( 0 % )
+Total PLLs : 0 / 12 ( 0 % )
+Total DLLs : 0 / 2 ( 0 % )

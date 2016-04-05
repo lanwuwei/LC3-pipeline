@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="LC3">
+		<CBX_INST_ENTRY INSTANCE_NAME="|LC3|LC3_sim:inst|lpm_ram_dq1:i_mem|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_l9f1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|LC3|lpm_ram_dq0:inst1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_5af1.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
